@@ -7,10 +7,10 @@
 * tactics + pac man
 * maze + card game
 
-## Game: SnakeCity
+## game: SnakeCity
 
-## TODO
+## tasks
 
-* display square on grid
-* move square with input
-* extend square to snake
+- [x] display square
+- [ ] move square with input
+- [ ] extend square to snake
