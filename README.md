@@ -12,5 +12,6 @@
 ## tasks
 
 - [x] display square
+- [x] serve webserver
 - [ ] move square with input
 - [ ] extend square to snake
