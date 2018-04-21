@@ -14,7 +14,7 @@
 * [x] display square
 * [x] serve webserver
 * [x] move square with input
-* [ ] extend square to snake
+* [x] extend square to snake
 * [ ] let snake auto move on game tick
 * [ ] lose game on self eating
 * [ ] leave trail after snake
