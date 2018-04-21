@@ -1,5 +1,5 @@
 import * as PIXI from "pixi.js";
-import { Snake } from "./snake";
+import { Snake, Direction } from "./snake";
 
 let Application = PIXI.Application,
   Container = PIXI.Container,
@@ -9,8 +9,8 @@ let Application = PIXI.Application,
   Sprite = PIXI.Sprite;
 
 export let gridSize = 32,
-  appWidth = 256,
-  appHeight = 256;
+  appWidth = 512,
+  appHeight = 512;
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -35,6 +35,9 @@ let config: PIXI.ApplicationOptions = {
 
 //Create a Pixi Application
 let app = new Application(config);
+app.ticker.stop();
+// app.ticker.speed = 0.00016;
+app.ticker.start();
 
 document.body.appendChild(app.view);
 
@@ -58,8 +61,7 @@ function setup() {
     down = keyboard(40);
   //Left arrow key `press` method
   left.press = () => {
-    //Change the cat's velocity when the key is pressed
-    snake.move("left");
+    snake.direction = Direction.Left;
   };
 
   //Left arrow key `release` method
@@ -70,17 +72,17 @@ function setup() {
   };
   //Up
   up.press = () => {
-    snake.move("up");
+    snake.direction = Direction.Up;
   };
   up.release = () => {};
   //Right
   right.press = () => {
-    snake.move("right");
+    snake.direction = Direction.Right;
   };
   right.release = () => {};
   //Down
   down.press = () => {
-    snake.move("down");
+    snake.direction = Direction.Down;
   };
   down.release = () => {};
   //Set the game state
@@ -89,12 +91,13 @@ function setup() {
   //Start the game loop
   app.ticker.add(delta => gameLoop(delta));
 }
-function gameLoop(delta: any) {
+function gameLoop(delta: number) {
   //Update the current game state:
   state(delta);
 }
-function play(delta: any) {
+function play(delta: number) {
   //Use the cat's velocity to make it move
+  snake.update(delta);
 }
 //The `keyboard` helper function
 function keyboard(keyCode: number) {

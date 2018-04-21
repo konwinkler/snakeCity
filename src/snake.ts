@@ -1,8 +1,17 @@
 import * as PIXI from "pixi.js";
 import { gridSize, appWidth, appHeight } from "./main";
 
+export enum Direction {
+  Up,
+  Down,
+  Left,
+  Right
+}
+
 export class Snake {
   bodyParts: Array<PIXI.Sprite> = [];
+  direction: Direction = Direction.Right;
+  move: number = 0;
 
   constructor(app: PIXI.Application) {
     for (var i = 0; i < 5; i++) {
@@ -20,28 +29,35 @@ export class Snake {
     return this.bodyParts[0];
   }
 
-  move(direction: "left" | "right" | "up" | "down") {
+  update(delta: number) {
+    this.move += delta;
+    if (this.move >= 30) {
+      this.move = 0;
+    } else {
+      return;
+    }
+
     var oldHead: PIXI.Point;
-    switch (direction) {
-      case "left":
+    switch (this.direction) {
+      case Direction.Left:
         if (this.head().x - gridSize >= 0) {
           oldHead = new PIXI.Point(this.head().x, this.head().y);
           this.head().x -= gridSize;
         }
         break;
-      case "right":
+      case Direction.Right:
         if (this.head().x + gridSize < appWidth) {
           oldHead = new PIXI.Point(this.head().x, this.head().y);
           this.head().x += gridSize;
         }
         break;
-      case "up":
+      case Direction.Up:
         if (this.head().y - gridSize >= 0) {
           oldHead = new PIXI.Point(this.head().x, this.head().y);
           this.head().y -= gridSize;
         }
         break;
-      case "down":
+      case Direction.Down:
         if (this.head().y + gridSize < appHeight) {
           oldHead = new PIXI.Point(this.head().x, this.head().y);
           this.head().y += gridSize;
