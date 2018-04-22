@@ -16,8 +16,11 @@
 * [x] move square with input
 * [x] extend square to snake
 * [x] let snake auto move on game tick
-* [ ] leave trail after snake
-* [ ] trail disappears after a set time
+* [x] leave trail after snake
+* [x] trail disappears after a set time
+* [ ] houses build next to streets
+* [ ] people spawn out of houses
+* [ ] snake can eat people
 
 ## future
 

@@ -1,5 +1,6 @@
 import * as PIXI from "pixi.js";
 import { Snake, Direction } from "./snake";
+import { Street } from "./street";
 
 let Application = PIXI.Application,
   Container = PIXI.Container,
@@ -11,6 +12,12 @@ let Application = PIXI.Application,
 export let gridSize = 32,
   appWidth = 512,
   appHeight = 512;
+
+export class Game {
+  streets: Map<PIXI.Point, Street> = new Map();
+}
+
+let game = new Game();
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -41,7 +48,10 @@ app.ticker.start();
 
 document.body.appendChild(app.view);
 
-loader.add("./assets/ca.png").load(setup);
+loader
+  .add("./assets/ca.png")
+  .add("./assets/street.png")
+  .load(setup);
 
 //Define any variables that are used in more than one function
 let state: any;
@@ -50,10 +60,6 @@ let snake: Snake;
 function setup() {
   //Create the `cat` sprite
   snake = new Snake(app);
-  // cat = new Sprite(resources["./assets/ca.png"].texture);
-  // cat.x = 0;
-  // cat.y = 0;
-  // app.stage.addChild(snake);
   //Capture the keyboard arrow keys
   let left = keyboard(37),
     up = keyboard(38),
@@ -97,7 +103,22 @@ function gameLoop(delta: number) {
 }
 function play(delta: number) {
   //Use the cat's velocity to make it move
-  snake.update(delta);
+  let lastPosition = snake.update(delta);
+  game.streets.forEach((value: Street, key: PIXI.Point) => {
+    let destroy = value.udpate(delta);
+    if (destroy) {
+      game.streets.delete(key);
+    }
+  });
+
+  if (lastPosition) {
+    if (game.streets.has(lastPosition)) {
+      game.streets.get(lastPosition).increaseLife();
+    } else {
+      var street = new Street(app, lastPosition);
+      game.streets.set(lastPosition, street);
+    }
+  }
 }
 //The `keyboard` helper function
 function keyboard(keyCode: number) {

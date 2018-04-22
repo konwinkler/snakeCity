@@ -65,10 +65,13 @@ export class Snake {
         break;
     }
     if (oldHead) {
+      var lastBodyPart = this.bodyParts[this.bodyParts.length - 1].position;
+      var lastPostion = new PIXI.Point(lastBodyPart.x, lastBodyPart.y);
       for (var i = this.bodyParts.length - 1; i > 0; i--) {
         this.bodyParts[i].position = this.bodyParts[i - 1].position;
       }
       this.bodyParts[1].position = oldHead;
+      return lastPostion;
     }
   }
 }
