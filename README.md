@@ -18,6 +18,7 @@
 * [x] let snake auto move on game tick
 * [x] leave trail after snake
 * [x] trail disappears after a set time
+* [ ] snail follows street
 * [ ] houses build next to streets
 * [ ] people spawn out of houses
 * [ ] snake can eat people
