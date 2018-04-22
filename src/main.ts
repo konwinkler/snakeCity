@@ -41,6 +41,7 @@ document.body.appendChild(app.view);
 loader
   .add("./assets/ca.png")
   .add("./assets/street.png")
+  .add("./assets/house.png")
   .load(setup);
 
 //Create a Pixi Application
@@ -64,11 +65,7 @@ function setup() {
   };
 
   //Left arrow key `release` method
-  left.release = () => {
-    //If the left arrow has been released, and the right arrow isn't down,
-    //and the cat isn't moving vertically:
-    //Stop the cat
-  };
+  left.release = () => {};
   //Up
   up.press = () => {
     world.snake.direction = Direction.Up;
@@ -98,7 +95,6 @@ function gameLoop(delta: number) {
 
 function play(delta: number) {
   world.update(delta);
-  //Use the cat's velocity to make it move
 }
 
 //The `keyboard` helper function

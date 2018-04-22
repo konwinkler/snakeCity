@@ -18,6 +18,10 @@ export class Street {
     this.lifeTime += 480;
   }
 
+  positionString() {
+    return `${this.sprite.x}, ${this.sprite.y}`;
+  }
+
   /**
    *
    * @param delta time update
