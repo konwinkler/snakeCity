@@ -44,6 +44,7 @@ export class World {
 
     // spawn houses
     // every street has a chance to spawn houses next to it
+    this.spawnRate += delta;
     if (this.spawnRate >= 60) {
       this.spawnRate = 0;
       this.streets.forEach((value: Street, key: string) => {
@@ -68,12 +69,6 @@ export class World {
           }
         }
       });
-    } else {
-      this.spawnRate += delta;
     }
-  }
-
-  randomInt(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }

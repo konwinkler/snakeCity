@@ -20,7 +20,7 @@
 * [x] trail disappears after a set time
 * [x] update street graphics
 * [ ] snail follows street
-* [ ] houses build next to streets
+* [x] houses build next to streets
 * [ ] people spawn out of houses
 * [ ] snake can eat people
 
